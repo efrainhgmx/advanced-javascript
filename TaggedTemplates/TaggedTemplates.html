@@ -5,9 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tagged Templates</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui;
+            color: white;
+            background-color: navy;
+        }
+
+        h1, p {
+            text-align: center;
+            letter-spacing: 2px;
+            max-width: 90%;
+            margin: auto;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Tagged Templates</h1>
     <p>Los tagged templates son una manera de usar funciones usando template literals y aplicar lógica similar a como lo hacen <strong>Styled Components</strong> en React.</p>
+
+    <script>
+        const taggedTemplate = (strings, ...values) => {
+            console.log(strings);
+            console.log(values);
+            
+            let newContent = ''; 
+            strings.forEach((string, index) => {
+                newContent += (values[index]) ? `${string} <strong>${values[index]}</strong>` : '';
+            });
+
+            return `<p>${newContent.toLocaleUpperCase()}</p>`;
+        };
+        
+        const $phraseElement = document.createElement('p');
+        document.body.appendChild($phraseElement);
+
+        $phraseElement.innerHTML = taggedTemplate`La ${'disiciplina es mejor'} que ${'el talento'}` ;
+    </script>
 </body>
 </html>
