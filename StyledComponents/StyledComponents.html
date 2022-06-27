@@ -9,6 +9,8 @@
 <body>
     <div id="container"></div>
     <script>
+        const HTMLTags = ['h1', 'h2', 'p', 'div', 'section', 'strong'];
+
         function component(strings, ...dynamicValues) {
             return function(props) {
                 //Slic hace una copia exacta de los elementos del array
@@ -20,9 +22,28 @@
                 })
                 return newContent.join('');
             };
+        };
+
+        const styledTags = (tags) => {
+            let styles = {};
+
+            tags.forEach((HTMLTag, index) => {
+                styles[HTMLTag] = function(styles) {
+                    return function(content) {
+                        return `<${HTMLTag} style="${styles}">
+                        ${content}
+                        </${HTMLTag}>`;
+                    }
+                }
+            })
+
+            return styles;
         }
 
-        const styled = {
+        const styled = styledTags(HTMLTags);
+
+        //Test for style components
+        const styledTest = {
             h1: function(styles){
                 return function(content) {
                     return `<h1 style="${styles}">${content}</h1>`;
@@ -46,7 +67,7 @@
             container.innerHTML = component;
         }
 
-        const Title = component`<marquee>${'message'}</marquee>`(props);
+        const Title = component`<strong>${'message'}</strong>`(props);
         render(TitleStyled(Title), window.container);
 
     </script>
