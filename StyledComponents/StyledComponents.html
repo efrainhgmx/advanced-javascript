@@ -16,13 +16,27 @@
                 console.log(newContent);
 
                 dynamicValues.forEach((value, index) => {
-                    console.log(newContent[index]);
-                    newContent[index] += 'ola';
-                    console.log(newContent)
+                    newContent[index] += props[value];
                 })
                 return newContent.join('');
             };
         }
+
+        const styled = {
+            h1: function(styles){
+                return function(content) {
+                    return `<h1 style="${styles}">${content}</h1>`;
+                }
+            },
+            h2: '',
+            div: ''
+        }
+
+        const TitleStyled = styled.h1`
+            color: red;
+            font-size: 25px;
+            font-family: sistem-ui;
+        `;
 
         const props = {
             message: 'No te rindas',
@@ -32,8 +46,8 @@
             container.innerHTML = component;
         }
 
-        const user = component`----${'message'}---`(props);
-        render(user, window.container);
+        const Title = component`<marquee>${'message'}</marquee>`(props);
+        render(TitleStyled(Title), window.container);
 
     </script>
 </body>
