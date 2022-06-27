@@ -9,17 +9,32 @@
 <body>
     <div id="container"></div>
     <script>
-        function component(string, ...dynamicValues) {
-            return 'valor';
+        function component(strings, ...dynamicValues) {
+            return function(props) {
+                //Slic hace una copia exacta de los elementos del array
+                let newContent=  strings.slice();
+                console.log(newContent);
+
+                dynamicValues.forEach((value, index) => {
+                    console.log(newContent[index]);
+                    newContent[index] += 'ola';
+                    console.log(newContent)
+                })
+                return newContent.join('');
+            };
+        }
+
+        const props = {
+            message: 'No te rindas',
         }
 
         function render(component, container) {
             container.innerHTML = component;
         }
 
-        render('hola mundo', window.container);
+        const user = component`----${'message'}---`(props);
+        render(user, window.container);
 
-        const user = component``;
     </script>
 </body>
 </html>
