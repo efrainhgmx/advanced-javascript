@@ -53,12 +53,23 @@
             div: ''
         }
 
+        //StyledCompontents
+
         const TitleStyled = styled.h1`
             color: red;
             font-size: 25px;
             font-family: sistem-ui;
         `;
 
+        const SectionStyled = styled.section`
+            width: 100%;
+            min-height: 580px;
+            border: 1px solid blue;
+            display: grid;
+            place-content: center;
+        `;
+
+        //DOM RENDER
         const props = {
             message: 'No te rindas',
         }
@@ -68,7 +79,9 @@
         }
 
         const Title = component`<strong>${'message'}</strong>`(props);
+        const Parrap = component`<p>${'message'}</p>`(props);
         render(TitleStyled(Title), window.container);
+        render(SectionStyled(Parrap), window.container);
 
     </script>
 </body>
