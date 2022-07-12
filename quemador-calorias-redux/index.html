@@ -46,6 +46,62 @@
   </main>
 
   <script>
+
+    const createStore = (reducer, initialState) =>{
+        let state = initialState;
+        let updater = () => {};
+        
+        const getState = () =>  state;
+        
+
+        const dispatch = (action) => {
+            state = reducer(state, action);
+            updater();
+        };
+
+        const subscribe = (listener) => {
+            updater = listener;
+        };
+
+        return {
+            getState,
+            dispatch,
+            subscribe
+        }
+    }
+
+    const reducer = (state, action) => {
+        switch(action?.type) {
+            case 'BURN':
+                return state + 1.42;
+            default: 
+                return state;
+
+        }
+        return action;
+    }
+    const store = createStore(reducer, 0);
+
+    //store.dispatch();
+    //store.getState();
+    //store.subscribe();
+
+    store.subscribe(() => {
+        console.log('ha cambiado algo en el storage', store.getState());
+
+        window.result.textContent = `Haz quemado ${store.getState()} calorias!!`;
+    });
+    store.dispatch('Voy a cambiar algo');
+
+    const burn = () => {
+        store.dispatch({
+            type: 'BURN',
+            payload: 1.42
+        })
+    };
+
+    window.burn.addEventListener('click', burn)
+
   </script>
 </body>
 
