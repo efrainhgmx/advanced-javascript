@@ -11,22 +11,7 @@
     <main class="profile">
       <div class="wrapper">
         <div class="profile-content" id="user">
-          <div class="user">
-            <img src="" alt="" width="140" height="140" />
-            <div class="details">
-              <p>Leonidas Esteban</p>
-            </div>
-            <p class="city"><em>Tacna</em></p>
-            <div class="social">
-              <p>32000</p>
-              <p>2000</p>
-              <p>1000</p>
-              <p>0</p>
-            </div>
-            <div class="bio">
-              <p>Hola, en este perfil aprendes a programar!</p>
-            </div>
-          </div>
+          
         </div>
       </div>
     </main>
@@ -40,6 +25,30 @@
         city: "Pueblo Paleta",
         social: [150, 160, 130, 255],
       };
+
+      function User({name, lastName, avatar, bio, city, social}) {
+
+        const [twitter, facebook, instagram, tiktok] = social;
+
+        return `<div class="user">
+            <img src=${avatar} alt=${name} width="140" height="140" />
+            <div class="details">
+              <p>${name} ${lastName}</p>
+            </div>
+            <p class="city"><em>${city}</em></p>
+            <div class="social">
+              <p>${twitter}</p>
+              <p>${facebook}</p>
+              <p>${instagram}</p>
+              <p>${tiktok}</p>
+            </div>
+            <div class="bio">
+              <p>${bio}</p>
+            </div>
+          </div>`;
+      }
+
+      window.user.innerHTML = User(user);
     </script>
   </body>
 </html>
