@@ -46,16 +46,18 @@
         ]
       }
 
-      function User({name, lastName, avatar, bio, city, social}) {
+      function User({name, lastName, avatar, bio: bio_, city, social}) {
 
         const [twitter, facebook, instagram, tiktok] = social;
         const [age, setAge] = useState(10);
 
         function render() {
+         const bio = bio_.replace('10', age);
+
           return `<div class="user">
               <img src=${avatar} alt=${name} width="140" height="140" />
               <div class="details">
-                <p>${name} ${lastName} ${age()}</p>
+                <p>${name} ${lastName}</p>
               </div>
               <p class="city"><em>${city}</em></p>
               <div class="social">
